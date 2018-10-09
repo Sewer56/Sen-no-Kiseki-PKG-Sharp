@@ -8,27 +8,27 @@ namespace Kiseki_PKG_Unpack
 {
     class Program
     {
-        static string Input_Path; // Path to directory to be compressed or pkg to be decompressed.
-        static byte[] Input_File; // Compressed .pkg archive.
+        static string _inputPath; // Path to directory to be compressed or pkg to be decompressed.
+        static byte[] _inputFile; // Compressed .pkg archive.
 
         // Unpacking
-        static string PKG_Directory; // Directory where contents will be extracted;
+        static string _pkgDirectory; // Directory where contents will be extracted;
 
         // Shared
-        static List<File_Entry> Files_In_PKG = new List<File_Entry>(30); // List of file entries;
-        static int Number_Of_Files; // Number of files in PKG archive;
+        static List<FileEntry> _filesInPkg = new List<FileEntry>(30); // List of file entries;
+        static int _numberOfFiles; // Number of files in PKG archive;
 
         // Packing
-        static List<byte> PKG_File = new List<byte>(10000);
+        static List<byte> _pkgFile = new List<byte>(10000);
 
-        static void Main(string[] Arguments)
+        static void Main(string[] arguments)
         {
             // Check Arguments
-            try { Input_Path = Arguments[0]; } catch { Write_Help(); }
+            try { _inputPath = arguments[0]; } catch { Write_Help(); }
 
             // If it's a file then decompress, else it's a directory.
-            if (File.Exists(Input_Path)) { Input_File = File.ReadAllBytes(Input_Path); Unarchive(); }
-            else if (Directory.Exists(Input_Path)) { Archive(); }
+            if (File.Exists(_inputPath)) { _inputFile = File.ReadAllBytes(_inputPath); Unarchive(); }
+            else if (Directory.Exists(_inputPath)) { Archive(); }
         }
 
         static void Write_Help()
@@ -50,60 +50,61 @@ namespace Kiseki_PKG_Unpack
         static void Unarchive()
         {
             // Get number of files and directory to output to.
-            Number_Of_Files = BitConverter.ToInt32(Input_File, 4); // 0x4: File Count
-            Directory.CreateDirectory(Path.ChangeExtension(Input_Path, null)); // Create Directory
-            PKG_Directory = Path.ChangeExtension(Input_Path, null); // Set Directory Path
+            _numberOfFiles = BitConverter.ToInt32(_inputFile, 4); // 0x4: File Count
+            Directory.CreateDirectory(Path.ChangeExtension(_inputPath, null)); // Create Directory
+            _pkgDirectory = Path.ChangeExtension(_inputPath, null); // Set Directory Path
 
             // Get unknown file header.
-            byte[] File_Start_Header = new byte[4]; Array.Copy(Input_File, File_Start_Header, 4);
-            File.WriteAllBytes(PKG_Directory + "\\Start_Header.bin", File_Start_Header );
+            byte[] fileStartHeader = new byte[4];
+            Array.Copy(_inputFile, fileStartHeader, 4);
+            File.WriteAllBytes(_pkgDirectory + "\\Start_Header.bin", fileStartHeader );
 
             // Pointer of where to read file in array.
-            int File_Pointer = 8; // Starts at first file entry.
+            int filePointer = 8; // Starts at first file entry.
 
             // For each file, get properties of the file.
-            for (int x = 0; x < Number_Of_Files; x++)
+            for (int x = 0; x < _numberOfFiles; x++)
             {
-                File_Entry PKG_Archive_File = new File_Entry();
+                FileEntry pkgArchiveFile = new FileEntry();
 
-                PKG_Archive_File.File_Name = Encoding.ASCII.GetString(Input_File, File_Pointer, File_Name_Length).TrimEnd('\0'); ; File_Pointer += File_Name_Length; // Get File Name
-                PKG_Archive_File.File_Size = BitConverter.ToInt32(Input_File, File_Pointer); File_Pointer += 0x4; // Get File Size
-                PKG_Archive_File.File_Compressed_Size = BitConverter.ToInt32(Input_File, File_Pointer); File_Pointer += 0x4; // Get Compressed Size
-                PKG_Archive_File.File_Offset = BitConverter.ToInt32(Input_File, File_Pointer); File_Pointer += 0x4; // Get File Offset
-                PKG_Archive_File.File_Compressed_Flag = BitConverter.ToInt32(Input_File, File_Pointer); File_Pointer += 0x4; // Get File Type
+                pkgArchiveFile.FileName = Encoding.ASCII.GetString(_inputFile, filePointer, FileNameLength).TrimEnd('\0'); ; filePointer += FileNameLength; // Get File Name
+                pkgArchiveFile.FileSize = BitConverter.ToInt32(_inputFile, filePointer); filePointer += 0x4; // Get File Size
+                pkgArchiveFile.FileCompressedSize = BitConverter.ToInt32(_inputFile, filePointer); filePointer += 0x4; // Get Compressed Size
+                pkgArchiveFile.FileOffset = BitConverter.ToInt32(_inputFile, filePointer); filePointer += 0x4; // Get File Offset
+                pkgArchiveFile.FileCompressedFlag = BitConverter.ToInt32(_inputFile, filePointer); filePointer += 0x4; // Get File Type
 
-                Console.WriteLine("\nFile Name: " + PKG_Archive_File.File_Name);
-                Console.WriteLine("File Size: " + PKG_Archive_File.File_Size);
-                Console.WriteLine("Compressed Size: " + PKG_Archive_File.File_Compressed_Size);
-                Console.WriteLine("File Offset: " + PKG_Archive_File.File_Offset);
-                Console.WriteLine("Compressed Flag: " + PKG_Archive_File.File_Compressed_Flag);
+                Console.WriteLine("\nFile Name: " + pkgArchiveFile.FileName);
+                Console.WriteLine("File Size: " + pkgArchiveFile.FileSize);
+                Console.WriteLine("Compressed Size: " + pkgArchiveFile.FileCompressedSize);
+                Console.WriteLine("File Offset: " + pkgArchiveFile.FileOffset);
+                Console.WriteLine("Compressed Flag: " + pkgArchiveFile.FileCompressedFlag);
 
-                Files_In_PKG.Add(PKG_Archive_File);
+                _filesInPkg.Add(pkgArchiveFile);
             }
 
             // Extract each file
-            for (int x = 0; x < Files_In_PKG.Count; x++)
+            for (int x = 0; x < _filesInPkg.Count; x++)
             {
                 // Linq statement, gets bytes of each file from the offset and length.
-                byte[] File_Bytes = Input_File.Skip(Files_In_PKG[x].File_Offset).Take(Files_In_PKG[x].File_Compressed_Size).ToArray();
+                byte[] fileBytes = _inputFile.Skip(_filesInPkg[x].FileOffset).Take(_filesInPkg[x].FileCompressedSize).ToArray();
 
                 // If file is compressed, decompress and write.
-                if (Files_In_PKG[x].File_Compressed_Flag >= 1) { File.WriteAllBytes(PKG_Directory + "\\" + Files_In_PKG[x].File_Name, Decompress_File(File_Bytes)); }
-                else { File.WriteAllBytes(PKG_Directory + "\\" + Files_In_PKG[x].File_Name, File_Bytes); }  
+                if (_filesInPkg[x].FileCompressedFlag >= 1) { File.WriteAllBytes(_pkgDirectory + "\\" + _filesInPkg[x].FileName, Decompress_File(fileBytes)); }
+                else { File.WriteAllBytes(_pkgDirectory + "\\" + _filesInPkg[x].FileName, fileBytes); }  
             }
         }
 
         /// Constants for Decompression
-        const int File_Name_Length = 0x40;
+        const int FileNameLength = 0x40;
 
         // Represents an individual file entry in the .pkg file header.
-        struct File_Entry
+        struct FileEntry
         {
-            public string File_Name;
-            public int File_Size;
-            public int File_Compressed_Size;
-            public int File_Offset;
-            public int File_Compressed_Flag; // Almost always 0x1
+            public string FileName;
+            public int FileSize;
+            public int FileCompressedSize;
+            public int FileOffset;
+            public int FileCompressedFlag; // Almost always 0x1
         }
 
         /*
@@ -136,54 +137,56 @@ namespace Kiseki_PKG_Unpack
         */
 
         // Compressed: Compressed File >> Same as our output.
-        private static byte[] Decompress_File(byte[] Compressed_File)
+        private static byte[] Decompress_File(byte[] compressedFile)
         {
             // Get file compression properties from header.
-            uint Uncompressed_File_Size = BitConverter.ToUInt32(Compressed_File, 0); // Expected file size.
-            uint Compressed_File_Size = BitConverter.ToUInt32(Compressed_File, 4); // Size of compressed data.
-            uint Compression_Block_Key = BitConverter.ToUInt32(Compressed_File, 8); // Unique byte to represent start of compressed data.
+            uint uncompressedFileSize = BitConverter.ToUInt32(compressedFile, 0); // Expected file size.
+            uint compressedFileSize = BitConverter.ToUInt32(compressedFile, 4); // Size of compressed data.
+            uint compressionBlockKey = BitConverter.ToUInt32(compressedFile, 8); // Unique byte to represent start of compressed data.
 
             // Decompressed file will be written here.
-            byte[] Decompressed_File = new byte[Uncompressed_File_Size];
+            byte[] decompressedFile = new byte[uncompressedFileSize];
 
             // Copy Raw Data to New Array
-            byte[] Raw_Data = new byte[Compressed_File.Length - 12];
-            Array.Copy((Array)Compressed_File, 12, (Array)Raw_Data, 0, Raw_Data.Length);
+            byte[] rawData = new byte[compressedFile.Length - 12];
+            Array.Copy((Array)compressedFile, 12, (Array)rawData, 0, rawData.Length);
 
             // Decompression Time!
-            int Decompressed_File_Destination_Index = 0; // Current pointer of where data is to be written onto the decompressed file.
-            for (int Byte_Index = 0; Byte_Index < Raw_Data.Length; Byte_Index++)
+            int decompressedFileIndex = 0; // Current pointer of where data is to be written onto the decompressed file.
+            for (int byteIndex = 0; byteIndex < rawData.Length; byteIndex++)
             {
-                byte Current_Byte = Raw_Data[Byte_Index]; // Get current byte.
+                byte currentByte = rawData[byteIndex]; // Get current byte.
 
                 // If the byte matches the unique compression key.
-                if ((int)Current_Byte == (int)Compression_Block_Key)
+                if ((int)currentByte == (int)compressionBlockKey)
                 {
-                    Byte_Index++; byte Second_Byte = Raw_Data[Byte_Index]; // Obtain the next byte.
+                    byteIndex++;
+                    byte secondByte = rawData[byteIndex]; // Obtain the next byte.
 
                     // If the 2nd byte matches unique compression key, copy data. (Safeguard in case the byte after compression key matches compression key).
-                    if ((int)Second_Byte == (int)Compression_Block_Key)
+                    if ((int)secondByte == (int)compressionBlockKey)
                     {
-                        Decompressed_File[Decompressed_File_Destination_Index] = Second_Byte;
-                        Decompressed_File_Destination_Index++;
+                        decompressedFile[decompressedFileIndex] = secondByte;
+                        decompressedFileIndex++;
                     }
                     else // Decompression.
                     {
-                        Byte_Index++; byte Third_Byte = Raw_Data[Byte_Index]; // Obtain Third Byte
-                        if ((uint)Second_Byte >= Compression_Block_Key) { Second_Byte--; } // Generally happens when Block_Key = 0x00
-                        // Write repeated bytes onto the file.
-                        Array.Copy((Array)Decompressed_File, Decompressed_File_Destination_Index - (int)Second_Byte, (Array)Decompressed_File, Decompressed_File_Destination_Index, (int)Third_Byte);
-                        Decompressed_File_Destination_Index += (int)Third_Byte; // Increase current index by amount of data written.
+                        byteIndex++;
+                        byte thirdByte = rawData[byteIndex]; // Obtain Third Byte
+                        if ((uint)secondByte > compressionBlockKey) { secondByte--; }  // Generally happens when Block_Key = 0x00
+                                                                                        // Write repeated bytes onto the file.
+                        Array.Copy((Array)decompressedFile, decompressedFileIndex - (int)secondByte, (Array)decompressedFile, decompressedFileIndex, (int)thirdByte);
+                        decompressedFileIndex += (int)thirdByte; // Increase current index by amount of data written.
                     }
                 }
                 // If the byte is not the compression key, keep copying.
                 else
                 {
-                    Decompressed_File[Decompressed_File_Destination_Index] = Current_Byte;
-                    Decompressed_File_Destination_Index++;
+                    decompressedFile[decompressedFileIndex] = currentByte;
+                    decompressedFileIndex++;
                 }
             }
-            return Decompressed_File;
+            return decompressedFile;
         }
 
         /////////////////////////////////
@@ -192,63 +195,63 @@ namespace Kiseki_PKG_Unpack
         static void Archive()
         {
             // Write Header & Remove File.
-            PKG_File.AddRange(File.ReadAllBytes(Input_Path + "\\Start_Header.bin"));
+            _pkgFile.AddRange(File.ReadAllBytes(_inputPath + "\\Start_Header.bin"));
 
             // Calculate where every file goes.
-            DirectoryInfo Directory_Info = new DirectoryInfo(Input_Path + "\\");
-            FileInfo[] PKG_Files = Directory_Info.GetFiles().Where(file => ((file.Name != "Start_Header.bin") && (file.Name != Input_Path.Substring(Input_Path.LastIndexOf(@"\") + 1) + ".pkg")) ).ToArray();
+            DirectoryInfo directoryInfo = new DirectoryInfo(_inputPath + "\\");
+            FileInfo[] pkgFiles = directoryInfo.GetFiles().Where(file => ((file.Name != "Start_Header.bin") && (file.Name != _inputPath.Substring(_inputPath.LastIndexOf(@"\") + 1) + ".pkg")) ).ToArray();
 
             // Write Number of Files
-            Number_Of_Files = PKG_Files.Length;
-            PKG_File.AddRange(BitConverter.GetBytes(Number_Of_Files));
+            _numberOfFiles = pkgFiles.Length;
+            _pkgFile.AddRange(BitConverter.GetBytes(_numberOfFiles));
 
             // Get properties for each file such as offset, compressed size etc.
-            int File_Pointer = 0x8; // After header + number of files.
-            int First_Data_Entry_Offset = (File_Entry_Length * Number_Of_Files) + 0x8;
-            for (int x = 0; x < PKG_Files.Length; x++)
+            int filePointer = 0x8; // After header + number of files.
+            int firstDataEntryOffset = (FileEntryLength * _numberOfFiles) + 0x8;
+            for (int x = 0; x < pkgFiles.Length; x++)
             {
-                File_Entry PKG_File_Properties = new File_Entry();
-                PKG_File_Properties.File_Name = PKG_Files[x].Name;
-                PKG_File_Properties.File_Size = (int)PKG_Files[x].Length;
-                PKG_File_Properties.File_Compressed_Size = (int)PKG_Files[x].Length;
-                PKG_File_Properties.File_Compressed_Flag = 0;
+                FileEntry pkgFileProperties = new FileEntry();
+                pkgFileProperties.FileName = pkgFiles[x].Name;
+                pkgFileProperties.FileSize = (int)pkgFiles[x].Length;
+                pkgFileProperties.FileCompressedSize = (int)pkgFiles[x].Length;
+                pkgFileProperties.FileCompressedFlag = 0;
 
-                if (x == 0) { PKG_File_Properties.File_Offset = First_Data_Entry_Offset; }
-                else { PKG_File_Properties.File_Offset = Files_In_PKG[x - 1].File_Offset + Files_In_PKG[x - 1].File_Size; }
+                if (x == 0) { pkgFileProperties.FileOffset = firstDataEntryOffset; }
+                else { pkgFileProperties.FileOffset = _filesInPkg[x - 1].FileOffset + _filesInPkg[x - 1].FileSize; }
 
-                Files_In_PKG.Add(PKG_File_Properties);
+                _filesInPkg.Add(pkgFileProperties);
             }
 
             // Write the file data.
-            foreach (File_Entry PKG_File_Properties in Files_In_PKG)
+            foreach (FileEntry pkgFileProperties in _filesInPkg)
             {
                 // Get file name to write in correct format
-                byte[] File_Name_Bytes = Encoding.ASCII.GetBytes(PKG_File_Properties.File_Name);
+                byte[] fileNameBytes = Encoding.ASCII.GetBytes(pkgFileProperties.FileName);
 
                 // Initialize name array as 0x00
-                byte[] File_Entry_Name_Proper = new byte[64]; for (int x = 0; x < File_Entry_Name_Proper.Length; x++) { File_Entry_Name_Proper[x] = 0x00; }
+                byte[] fileEntryNameProper = new byte[64]; for (int x = 0; x < fileEntryNameProper.Length; x++) { fileEntryNameProper[x] = 0x00; }
 
                 // Copy name array
-                Array.Copy(File_Name_Bytes, File_Entry_Name_Proper, File_Name_Bytes.Length);
+                Array.Copy(fileNameBytes, fileEntryNameProper, fileNameBytes.Length);
 
-                PKG_File.AddRange(File_Entry_Name_Proper); // File name
-                PKG_File.AddRange(BitConverter.GetBytes(PKG_File_Properties.File_Size)); // File size
-                PKG_File.AddRange(BitConverter.GetBytes(PKG_File_Properties.File_Compressed_Size)); // File compressed size
-                PKG_File.AddRange(BitConverter.GetBytes(PKG_File_Properties.File_Offset)); // File offset
-                PKG_File.AddRange(BitConverter.GetBytes(PKG_File_Properties.File_Compressed_Flag)); // File compressed flag
+                _pkgFile.AddRange(fileEntryNameProper); // File name
+                _pkgFile.AddRange(BitConverter.GetBytes(pkgFileProperties.FileSize)); // File size
+                _pkgFile.AddRange(BitConverter.GetBytes(pkgFileProperties.FileCompressedSize)); // File compressed size
+                _pkgFile.AddRange(BitConverter.GetBytes(pkgFileProperties.FileOffset)); // File offset
+                _pkgFile.AddRange(BitConverter.GetBytes(pkgFileProperties.FileCompressedFlag)); // File compressed flag
             }
 
             // Write out each file
-            foreach (File_Entry PKG_File_Properties in Files_In_PKG)
+            foreach (FileEntry pkgFileProperties in _filesInPkg)
             {
-                PKG_File.AddRange(File.ReadAllBytes(Input_Path + "\\" + PKG_File_Properties.File_Name));
+                _pkgFile.AddRange(File.ReadAllBytes(_inputPath + "\\" + pkgFileProperties.FileName));
             }
 
             // Write the file.
-            File.WriteAllBytes(Input_Path + "\\" + Input_Path.Substring(Input_Path.LastIndexOf(@"\") + 1) + ".pkg", PKG_File.ToArray());
+            File.WriteAllBytes(_inputPath + "\\" + _inputPath.Substring(_inputPath.LastIndexOf(@"\") + 1) + ".pkg", _pkgFile.ToArray());
         }
 
         /// Constants for Decompression
-        const int File_Entry_Length = 0x50;
+        const int FileEntryLength = 0x50;
     }
 }
