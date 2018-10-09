@@ -1,0 +1,65 @@
+//------------------------------------------------
+//--- 010 Editor v8.0.1 Binary Template
+//
+//      File: Sen no Kiseki PKG File (& Compression Notes)
+//   Authors: Sewer56
+//   Version: 1.0.0
+//   Purpose: Reverse Engineering
+//  Category: 
+// File Mask: 
+//  ID Bytes: 
+//   History: 
+//------------------------------------------------
+
+struct FileHeader
+{
+    int unknownSignature;
+    int fileCount;      
+};
+
+struct FileEntry 
+{
+    char fileName[64];      // Name of file (ANSI)
+    int fileSize;           // Size of file before compression.
+    int compressedSize;     // Size of file after compression (including 12 byte header).
+    int fileOffset;         // Offset to File struct.
+    int compressedFlag;     // 0 = Uncompressed; 1 = Compressed
+};
+
+// Not used in this template; for reference only.
+struct File
+{
+    int uncompressedSize;   // Size of file after decompression
+    int compressedSize;     // Length of compressed file (including 12 byte header)
+    byte compressionKey;    // When this byte is seen; assume next compression block.
+                            // Until compression block is seen; just copy raw bytes.
+};
+
+// Not used in this template; for reference only.
+struct CompressionBlock
+{
+   char compressionKey;     // When this byte is seen; assume next compression block.
+                            // Until compression block is seen; just copy raw bytes.
+                            // In order to optimize the file to size; an O(n) algorithm
+                            // is used to determine the least used byte in file.
+
+   char offset;             // Where to copy from earlier in the file.
+
+                            // If this value is greater than the compressionKey; take away
+                            // 1 to get the true offset.
+
+                            // In order to allow  the compression format to store an offset
+                            // equal to the key and not mistake it as raw byte; the format
+                            // adds 1 for values >= compression key effectively making max
+                            // offset 254 and not 255
+
+   char length;             // Amount of bytes earlier in the file to copy from.
+                            // Sen no Kiseki/Phyre does not support overlapping copies;
+                            // presumably due to vector optimizations.
+                            // Thus length cannot be greater than offset.
+};
+
+
+// Little Endian but not forced by script.
+FileHeader header;
+FileEntry entries[header.fileCount];

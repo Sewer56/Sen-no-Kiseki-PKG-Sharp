@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "SenCompressSharp": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}

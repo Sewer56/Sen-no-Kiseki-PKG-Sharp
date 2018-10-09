@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "PKGToolCmd": {
+      "commandName": "Project",
+      "commandLineArgs": "\"E:\\Users\\Desktop\\Github\\Test\\New\\C_PLY000_C10\"",
+      "nativeDebugging": true
+    }
+  }
+}

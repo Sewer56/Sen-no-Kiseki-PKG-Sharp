@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2036
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PKGLib", "PKGLib\PKGLib.csproj", "{EF4ACA62-058D-41B5-A23D-13840073029A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SenCompressSharp", "SenCompressSharp\SenCompressSharp.csproj", "{B5F30C5E-139B-4274-9644-D7CBC1876CD6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PKGToolCmd", "PKGToolCmd\PKGToolCmd.csproj", "{9B9DAB15-20D7-4793-891B-A616828D9DE5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EF4ACA62-058D-41B5-A23D-13840073029A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF4ACA62-058D-41B5-A23D-13840073029A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF4ACA62-058D-41B5-A23D-13840073029A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF4ACA62-058D-41B5-A23D-13840073029A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5F30C5E-139B-4274-9644-D7CBC1876CD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5F30C5E-139B-4274-9644-D7CBC1876CD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5F30C5E-139B-4274-9644-D7CBC1876CD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5F30C5E-139B-4274-9644-D7CBC1876CD6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B9DAB15-20D7-4793-891B-A616828D9DE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B9DAB15-20D7-4793-891B-A616828D9DE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B9DAB15-20D7-4793-891B-A616828D9DE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B9DAB15-20D7-4793-891B-A616828D9DE5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {657C5119-F0F1-4B47-BBB8-05F4FD1B4B69}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,9 @@
+{
+	"name": "dlang-sencompress",
+	"authors": [
+		"Sewer56"
+	],
+	"description": "A simple library providing support for Sen no Kiseki's (Trails of Cold Steel) Type \"1\" compression.",
+	"copyright": "Copyright © 2018, Sewer56",
+	"license": "GPLV3"
+}

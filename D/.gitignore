@@ -1,0 +1,14 @@
+.dub
+docs.json
+__dummy.html
+docs/
+dlang-sencompress.so
+dlang-sencompress.dylib
+dlang-sencompress.dll
+dlang-sencompress.a
+dlang-sencompress.lib
+dlang-sencompress-test-*
+*.exe
+*.o
+*.obj
+*.lst
