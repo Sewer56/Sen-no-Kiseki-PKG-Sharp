@@ -1,8 +1,8 @@
 ## Notes
 
-Last revised: Oct 10 2018
+**Last revised**: Oct 10 2018
 
-Author: Sewer56
+**Author**: Sewer56
 
 This guide is simplified and aims to explain the compression algorithm in very simple steps; such that it can be consumed by anyone - novice programmer, hobbyist, computer science student or professional.
 
