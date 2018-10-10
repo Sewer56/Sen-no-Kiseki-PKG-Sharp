@@ -16,8 +16,9 @@ The _PKGLib_ and _SenCompress_ libraries are written in _.NET Standard_ thus can
 
 - [PKG File Structure](https://github.com/sewer56lol/Sen-no-Kiseki-PKG-Sharp/blob/master/docs/PKG-File-Structure.md)
 - [Compression Explained](https://github.com/sewer56lol/Sen-no-Kiseki-PKG-Sharp/blob/master/docs/Compression-Explained.md)
+- [Using the Libraries](https://github.com/sewer56lol/Sen-no-Kiseki-PKG-Sharp/blob/master/docs/Using-The-Libraries.md)
 
-## Compiling this repository.
+## Manually compiling this repository.
 
 In order to build this project; make sure that you have [Visual D](https://github.com/dlang/visuald) installed as well as the multilib version of [LDC](https://github.com/ldc-developers/ldc/releases).
 
