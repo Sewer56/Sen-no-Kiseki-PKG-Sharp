@@ -5,21 +5,30 @@
     <Platforms>AnyCPU;x64;x86</Platforms>
     <LangVersion>latest</LangVersion>
     <EnableUnmanagedDebugging>true</EnableUnmanagedDebugging>
+    <Authors>Sewer56</Authors>
+    <Company />
+    <Description>A simple easy to use library for the opening, modifying and saving of PKG archives found in Sen no Kiseki/Trails of Cold Steel.</Description>
+    <PackageProjectUrl>https://github.com/sewer56lol/Sen-no-Kiseki-PKG-Sharp</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/sewer56lol/Sen-no-Kiseki-PKG-Sharp/blob/master/README.md</PackageLicenseUrl>
+    <Version>1.0.1</Version>
+    <RepositoryUrl>https://github.com/sewer56lol/Sen-no-Kiseki-PKG-Sharp/blob/master/LICENSE.md</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <OutputPath>E:\Users\Desktop\Github\Sen-PKG-Tool-II\build\</OutputPath>
+    <OutputPath></OutputPath>
+    <DocumentationFile>E:\Users\Desktop\Github\Sen-no-Kiseki-PKG-Tool\CSharp\PKGLib\PKGLib.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <OutputPath>E:\Users\Desktop\Github\Sen-PKG-Tool-II\build\</OutputPath>
+    <OutputPath></OutputPath>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <OutputPath>E:\Users\Desktop\Github\Sen-PKG-Tool-II\build\</OutputPath>
+    <OutputPath></OutputPath>
     <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
 

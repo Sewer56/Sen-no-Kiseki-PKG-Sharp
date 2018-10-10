@@ -68,11 +68,10 @@ public byte[] decompressRaw(byte[] source, byte[] destination, ubyte compression
             sourcePointer++;
             ubyte offset = source[sourcePointer];
 
-            // If the 2nd byte matches unique compression key, copy data.
+            // If the 2nd byte matches unique compression key, just copy raw byte.
             // The compressor supports placing the block key twice in succession in order to not
             // perform a copy.
 
-            // This is done in the case that there is not enough compressible data to warrant a full block. (1/2 bytes of key)
             if (offset == compressionBlockKey)
             {
                 // Direct Byte Copy
