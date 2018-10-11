@@ -23,7 +23,7 @@ namespace SenCompressSharp
         public static extern void Decompress(byte[] data, int length, byte[] destination);
 
         [SuppressUnmanagedCodeSecurity]
-        [DllImport("SenCompress64.dll",
+        [DllImport("SenCompress32.dll",
             EntryPoint = "externDecompress",
             CallingConvention = CallingConvention.Cdecl,
             CharSet = CharSet.Ansi)]
