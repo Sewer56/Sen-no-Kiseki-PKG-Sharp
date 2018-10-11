@@ -6,7 +6,7 @@
     <Platforms>AnyCPU;x64;x86</Platforms>
     <Authors>Sewer56</Authors>
     <Description>A simple compression and decompression library for Sen no Kiseki files inside PKG archives.</Description>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/sewer56lol/Sen-no-Kiseki-PKG-Sharp</RepositoryUrl>
     <PackageProjectUrl>https://github.com/sewer56lol/Sen-no-Kiseki-PKG-Sharp</PackageProjectUrl>

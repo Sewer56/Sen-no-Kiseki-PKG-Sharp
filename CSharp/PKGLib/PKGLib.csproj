@@ -10,7 +10,7 @@
     <Description>A simple easy to use library for the opening, modifying and saving of PKG archives found in Sen no Kiseki/Trails of Cold Steel.</Description>
     <PackageProjectUrl>https://github.com/sewer56lol/Sen-no-Kiseki-PKG-Sharp</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/sewer56lol/Sen-no-Kiseki-PKG-Sharp/blob/master/README.md</PackageLicenseUrl>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <RepositoryUrl>https://github.com/sewer56lol/Sen-no-Kiseki-PKG-Sharp/blob/master/LICENSE.md</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
   </PropertyGroup>
