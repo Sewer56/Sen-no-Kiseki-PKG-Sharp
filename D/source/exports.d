@@ -8,9 +8,9 @@ import compress;
 import decompress;
 
 
-// Callback to calling code (in CDECL convention) that allocates and copies their own array from 
+// Callback to calling code (in CDECL convention) that allocates and copies to their own array from 
 // a byte* and length combo.
-extern(C) alias AllocateMemoryFunctionDefinition = void function(byte*, int);  // D code
+extern(C) alias CopyMemoryFunctionDefinition = void function(byte*, int);  // D code
 
 /**
 	Compresses a supplied byte array.
@@ -29,17 +29,16 @@ extern(C) alias AllocateMemoryFunctionDefinition = void function(byte*, int);  /
 	Increasing this value compresses the data to smaller filesizes at the expense of compression time.
 	Changing this value has no noticeable effect on decompression time.
 
-    allocateMemoryPtr =     A pointer to a CDECL function that allocates a region of memory
-                            with the specified length and returns a pointer to the allocated region.
+    allocateMemoryPtr =     A pointer to a CDECL function that copies a region of memory back to its own
+                            buffer given a pointer and length.
 
 */
-export extern(C) void externCompress(byte* data, int length, int searchBufferSize, AllocateMemoryFunctionDefinition allocateMemoryPtr)
+export extern(C) void externCompress(byte* data, int length, int searchBufferSize, CopyMemoryFunctionDefinition copyMemoryPtr)
 {
 	byte[] passedData = data[0 .. length];	
 	auto compressedData = compressData(passedData, searchBufferSize);
 
-    // Malloc and copy byte array.
-    allocateMemoryPtr(&compressedData[0], cast(int)compressedData.length);
+    copyMemoryPtr(&compressedData[0], cast(int)compressedData.length);
 }
 
 /**

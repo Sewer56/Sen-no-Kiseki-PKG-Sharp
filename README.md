@@ -28,6 +28,8 @@ To compile the C# components; you will require the .NET Core SDK; the version us
 
 Once you are done; simply open `dlang-sencompress.sln` inside the `D` folder.
 
+Note: You may need to adjust the output path in your project properties!
+
 ## Adding the libraries to your own project.
 
 Do note that in order to use the actual libraries in your own projects you do not actually need the D compiler. 
