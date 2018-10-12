@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -43,10 +43,6 @@
 
   <ItemGroup>
     <Reference Include="System.Web" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="ILLink.Tasks" Version="0.1.5-preview-1841731" />
   </ItemGroup>
 
 </Project>
