@@ -28,7 +28,13 @@ To compile the C# components; you will require the .NET Core SDK; the version us
 
 Once you are done; simply open `dlang-sencompress.sln` inside the `D` folder.
 
-Note: You may need to adjust the output path in your project properties!
+### Small Note
+To successfully compile this project, you will need to compile twice (and fail the first time).
+SenCompressSharp expects both the x86 and x64 DLLs produced by the `dlang-sencompress` build; so you must first build x64 (and fail because of SenCompress32.dll being missing) and then x86, or vice versa.
+
+*Basically build X64 (fail) then X86 and then either of the two that you want*.
+
+I can't do a post build event file copy as PKGLib depends on SenCompressSharp and that would not copy SenCompress32/SenCompress64 otherwise if I don't include them in the files list.
 
 ## Adding the libraries to your own project.
 
