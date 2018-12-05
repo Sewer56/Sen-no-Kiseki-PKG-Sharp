@@ -79,11 +79,23 @@ namespace PKGToolCmd
 
             try
             {
+                #if DEBUG
+                Console.WriteLine("Starting NoGC region.");
+                #endif
                 StartNoGCRegion(true);
-                
+
+                #if DEBUG
+                Console.WriteLine("Performing Action.");
+                #endif
+
                 // Generation 2 garbage collection is now
                 // deferred, until the allocated limit is broken.
                 action();
+
+
+                #if DEBUG
+                Console.WriteLine("Ending NoGC region.");
+                #endif
 
                 if (GCSettings.LatencyMode == GCLatencyMode.NoGCRegion)
                     GC.EndNoGCRegion();
@@ -199,13 +211,23 @@ namespace PKGToolCmd
             {
                 Parallel.ForEach(archive.Files, _parallelOptions, file =>
                 {
+                    #if DEBUG
+                    Console.WriteLine($"Extracting: {directoryName}\\{file.FileName}");
+                    #endif
+
                     File.WriteAllBytes($"{directoryName}\\{file.FileName}", file.Data);
                 });
             }
             else
             {
                 foreach (var file in archive.Files)
+                {
+                    #if DEBUG
+                    Console.WriteLine($"Extracting: {directoryName}\\{file.FileName}");
+                    #endif
                     File.WriteAllBytes($"{directoryName}\\{file.FileName}", file.GetUncompressedFile());
+                }
+                
             }
         }
 
@@ -232,6 +254,9 @@ namespace PKGToolCmd
             {
                 Parallel.ForEach(filesInDirectory, _parallelOptions, filePath =>
                 {
+                    #if DEBUG
+                    Console.WriteLine($"Creating File: {filePath}");
+                    #endif
                     var pkgFile = new PKGLib.Definitions.Managed.File(filePath, !_noCompress);
 
                     lock (LockObject)
@@ -241,7 +266,13 @@ namespace PKGToolCmd
             else
             {
                 foreach (string filePath in filesInDirectory)
+                {
+                    #if DEBUG
+                    Console.WriteLine($"Creating File: {filePath}");
+                    #endif
                     archive.Files.Add(new PKGLib.Definitions.Managed.File(filePath, !_noCompress));
+                }
+                
             }
 
             archive.Save(savePath);
@@ -273,6 +304,9 @@ namespace PKGToolCmd
         /// </summary>
         static void ShowHelp()
         {
+            #if DEBUG
+            Console.WriteLine("[DEBUG BUILD]");
+            #endif
             Console.WriteLine("=> Sen no Kiseki PKG Archive Utility by Sewer56");
             Console.WriteLine("=> Usage:");
             Console.WriteLine("Extract:   PKGToolCmd.exe <file>");

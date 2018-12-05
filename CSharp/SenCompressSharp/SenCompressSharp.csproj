@@ -38,6 +38,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
     <OutputPath />
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -56,24 +57,24 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="..\..\build\SenCompress32.dll" Link="SenCompress32.dll">
+    <None Include="..\..\build\SenCompress32.dll" Link="SenCompress32.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\build\SenCompress32.exp" Link="SenCompress32.exp">
+    </None>
+    <None Include="..\..\build\SenCompress32.exp" Link="SenCompress32.exp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\build\SenCompress32.lib" Link="SenCompress32.lib">
+    </None>
+    <None Include="..\..\build\SenCompress32.lib" Link="SenCompress32.lib">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\build\SenCompress64.dll" Link="SenCompress64.dll">
+    </None>
+    <None Include="..\..\build\SenCompress64.dll" Link="SenCompress64.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\build\SenCompress64.exp" Link="SenCompress64.exp">
+    </None>
+    <None Include="..\..\build\SenCompress64.exp" Link="SenCompress64.exp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\build\SenCompress64.lib" Link="SenCompress64.lib">
+    </None>
+    <None Include="..\..\build\SenCompress64.lib" Link="SenCompress64.lib">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </None>
   </ItemGroup>
 
 </Project>
