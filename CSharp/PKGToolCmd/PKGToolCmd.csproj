@@ -14,6 +14,7 @@
     <RetainVMGarbageCollection>true</RetainVMGarbageCollection>
     <ThreadPoolMinThreads>4</ThreadPoolMinThreads>
     <ThreadPoolMaxThreads>25</ThreadPoolMaxThreads>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -37,6 +38,10 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <PlatformTarget>AnyCPU</PlatformTarget>
     <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
+    <Optimize>true</Optimize>
   </PropertyGroup>
 
   <ItemGroup>
