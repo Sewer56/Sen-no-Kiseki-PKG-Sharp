@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29021.104
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SenCompressSharp", "CSharp\SenCompressSharp\SenCompressSharp.csproj", "{8C54130B-43B5-4B07-9ADF-27875A75DEFD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8C54130B-43B5-4B07-9ADF-27875A75DEFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C54130B-43B5-4B07-9ADF-27875A75DEFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C54130B-43B5-4B07-9ADF-27875A75DEFD}.Debug|x64.ActiveCfg = Debug|x64
+		{8C54130B-43B5-4B07-9ADF-27875A75DEFD}.Debug|x64.Build.0 = Debug|x64
+		{8C54130B-43B5-4B07-9ADF-27875A75DEFD}.Debug|x86.ActiveCfg = Debug|x86
+		{8C54130B-43B5-4B07-9ADF-27875A75DEFD}.Debug|x86.Build.0 = Debug|x86
+		{8C54130B-43B5-4B07-9ADF-27875A75DEFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C54130B-43B5-4B07-9ADF-27875A75DEFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C54130B-43B5-4B07-9ADF-27875A75DEFD}.Release|x64.ActiveCfg = Release|x64
+		{8C54130B-43B5-4B07-9ADF-27875A75DEFD}.Release|x64.Build.0 = Release|x64
+		{8C54130B-43B5-4B07-9ADF-27875A75DEFD}.Release|x86.ActiveCfg = Release|x86
+		{8C54130B-43B5-4B07-9ADF-27875A75DEFD}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6C26BFD8-924C-45B0-9902-CFE36BB6FB58}
+	EndGlobalSection
+EndGlobal

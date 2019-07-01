@@ -1,0 +1,30 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29021.104
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{002A2DE9-8BB6-484D-9802-7E4AD4084715}") = "dlang-sencompress", "D\.dub\dlang-sencompress.visualdproj", "{B678F1F6-D19B-41DE-A52E-25AD0B531759}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		debug|Win32 = debug|Win32
+		debug|x64 = debug|x64
+		release|Win32 = release|Win32
+		release|x64 = release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B678F1F6-D19B-41DE-A52E-25AD0B531759}.debug|Win32.ActiveCfg = debug|Win32
+		{B678F1F6-D19B-41DE-A52E-25AD0B531759}.debug|Win32.Build.0 = debug|Win32
+		{B678F1F6-D19B-41DE-A52E-25AD0B531759}.debug|x64.ActiveCfg = debug|x64
+		{B678F1F6-D19B-41DE-A52E-25AD0B531759}.debug|x64.Build.0 = debug|x64
+		{B678F1F6-D19B-41DE-A52E-25AD0B531759}.release|Win32.ActiveCfg = release|Win32
+		{B678F1F6-D19B-41DE-A52E-25AD0B531759}.release|Win32.Build.0 = release|Win32
+		{B678F1F6-D19B-41DE-A52E-25AD0B531759}.release|x64.ActiveCfg = release|x64
+		{B678F1F6-D19B-41DE-A52E-25AD0B531759}.release|x64.Build.0 = release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4C5B3CBA-6418-4DFB-8FA2-728A3766CEFB}
+	EndGlobalSection
+EndGlobal

@@ -65,24 +65,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\..\build\SenCompress32.dll" Link="SenCompress32.dll">
+    <None Include="SenCompressSharp.targets" Pack="true" PackagePath="build"/>
+    <None Include="..\..\build\SenCompress32.dll" Link="SenCompress32.dll" Pack="true" PackagePath="build">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\build\SenCompress32.exp" Link="SenCompress32.exp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\build\SenCompress32.lib" Link="SenCompress32.lib">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\build\SenCompress64.dll" Link="SenCompress64.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\build\SenCompress64.exp" Link="SenCompress64.exp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\build\SenCompress64.lib" Link="SenCompress64.lib">
+    <None Include="..\..\build\SenCompress64.dll" Link="SenCompress64.dll" Pack="true" PackagePath="build">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-
 </Project>

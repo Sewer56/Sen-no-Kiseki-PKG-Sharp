@@ -4,10 +4,15 @@ import std.datetime.stopwatch;
 import decompress;
 import compress;
 
+/*  Small test program.
+
+    To test, comment out DllMain and change output type from DLL to EXE.
+    Remove the additional -shared commandline argument from properties.
+*/
+
+/+
 void main()
 {
-    // Remember to change output type from DLL to EXE before testing.
-    // Also remove the -shared additional commandline argument.
     decompressTest();
     compressTest();
     redecompressTest();
@@ -80,3 +85,4 @@ void redecompressTest()
         std.file.write("test.redecompressed", decompressed);
     }
 }
++/
