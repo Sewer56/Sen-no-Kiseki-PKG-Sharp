@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -9,10 +9,12 @@
     <Company />
     <Description>A simple easy to use library for the opening, modifying and saving of PKG archives found in Sen no Kiseki/Trails of Cold Steel.</Description>
     <PackageProjectUrl>https://github.com/sewer56lol/Sen-no-Kiseki-PKG-Sharp</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/sewer56lol/Sen-no-Kiseki-PKG-Sharp/blob/master/README.md</PackageLicenseUrl>
-    <Version>1.0.3</Version>
+    <PackageLicenseUrl></PackageLicenseUrl>
+    <Version>1.0.4</Version>
     <RepositoryUrl>https://github.com/sewer56lol/Sen-no-Kiseki-PKG-Sharp/blob/master/LICENSE.md</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -24,6 +26,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <OutputPath></OutputPath>
+    <DocumentationFile>obj\PKGLib.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -40,6 +43,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <OutputPath />
+    <DocumentationFile>obj\PKGLib.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -61,6 +65,13 @@
     <Reference Include="System.Runtime.CompilerServices.Unsafe">
       <HintPath>C:\Users\sewer\.nuget\packages\system.runtime.compilerservices.unsafe\4.5.2\ref\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\LICENSE.md">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
