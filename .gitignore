@@ -17,7 +17,9 @@
 [Rr]eleases/
 x64/
 x86/
-build/
+build/*.dll
+build/*.exp
+build/*.lib
 bld/
 [Bb]in/
 [Oo]bj/
