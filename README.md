@@ -20,7 +20,7 @@ The _PKGLib_ and _SenCompress_ libraries are written in _.NET Standard_ thus can
 
 ## Compilation Instructions
 
-### Compressor/Decompressor (dlang-prs)
+### Compressor/Decompressor (dlang-sencompress)
 - Install the latest version of Visual D: https://github.com/dlang/visuald/releases
 - Add the DMD and LDC compilers to your System Environment Variables' PATH (in case they are not added).
 ![Adding to PATH](https://i.imgur.com/lrMoasL.png)
@@ -31,7 +31,7 @@ Note: Successful builds output in `build` directory. where the solution files re
 
 ### All C# Components (Wrapper, PKG Library, Commandline Util.)
 - Install the latest .NET Core 2.X SDK.
-- Compile `dlang-prs` (see above) for Win32 (x86) and x64.
+- Compile `dlang-sencompress` (see above) for Win32 (x86) and x64.
 - Open `CSharp.sln` in Visual Studio and build.
 
 ## Adding the libraries to your own project.
