@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Runtime.InteropServices;
-using System.Text;
 
 namespace SenCompressSharp
 {
@@ -17,14 +14,15 @@ namespace SenCompressSharp
         private static Action<IntPtr, int, byte[]>                    _decompressFunctionAlt;
 
         /* 12 Byte Header definition for a compressed file. */
-        public struct FileHeader
+        struct FileHeader
         {
             public int  UncompressedSize;
             public int  CompressedSize;
             public byte CompressionKey;
         }
-
+        
         /* Defines a C# function which fills a managed array using a pointer and length. */
+        /// 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate void CopyArrayFunction(IntPtr dataPtr, int length);
 
@@ -95,7 +93,8 @@ namespace SenCompressSharp
         /// Decompresses a supplied array of PKG Type 1 (RLE) compressed file bytes
         /// (including 12 byte header) and returns a decompressed copy.
         /// </summary>
-        /// <param name="data">The individual RLE compressed data with header to decompress.</param>
+        /// <param name="dataPtr">The pointer to individual RLE compressed data with header.</param>
+        /// <param name="length">The length of memory referenced by the pointer.</param>
         /// <returns></returns>
         public static unsafe byte[] Decompress(byte* dataPtr, int length)
         {

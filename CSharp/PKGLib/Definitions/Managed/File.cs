@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using PKGLib.Definitions.Native;
 using PKGLib.Utilities;
 using SenCompressSharp;
